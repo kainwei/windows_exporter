@@ -53,30 +53,35 @@ const (
 	serviceName                  = "windows_exporter"
 )
 
+
+
 var (
+	hostStr,_ = os.Hostname()
+	hl = map[string]string{"host": hostStr}
+	hostLabel = prometheus.Labels(hl)
 	scrapeDurationDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(collector.Namespace, "exporter", "collector_duration_seconds"),
 		"windows_exporter: Duration of a collection.",
 		[]string{"collector"},
-		nil,
+		hostLabel,
 	)
 	scrapeSuccessDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(collector.Namespace, "exporter", "collector_success"),
 		"windows_exporter: Whether the collector was successful.",
 		[]string{"collector"},
-		nil,
+		hostLabel,
 	)
 	scrapeTimeoutDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(collector.Namespace, "exporter", "collector_timeout"),
 		"windows_exporter: Whether the collector timed out.",
 		[]string{"collector"},
-		nil,
+		hostLabel,
 	)
 	snapshotDuration = prometheus.NewDesc(
 		prometheus.BuildFQName(collector.Namespace, "exporter", "perflib_snapshot_duration_seconds"),
 		"Duration of perflib snapshot capture",
 		nil,
-		nil,
+		hostLabel,
 	)
 )
 
