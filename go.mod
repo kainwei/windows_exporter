@@ -1,4 +1,4 @@
-module github.com/prometheus-community/windows_exporter
+module github.com/kainwei/windows_exporter
 
 go 1.13
 
